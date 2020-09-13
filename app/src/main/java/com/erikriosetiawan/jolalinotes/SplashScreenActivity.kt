@@ -10,13 +10,16 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        setStatusBar()
+        setTransparentStatusBar()
     }
 
-    // Change the status bar color
-    private fun setStatusBar() {
-        window.addFlags((WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS))
-        window.addFlags((WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS))
-        window.statusBarColor = ContextCompat.getColor(this, R.color.colorSplashScreenStatusBar)
+    /**
+     * Create transparent status bar
+     */
+    private fun setTransparentStatusBar() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 }
