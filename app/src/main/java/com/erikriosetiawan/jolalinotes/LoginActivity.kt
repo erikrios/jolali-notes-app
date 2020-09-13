@@ -13,9 +13,16 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_login)
+        setContentView(binding.root)
 
         setTextRegisterColor()
+        binding.btnLogin.setOnClickListener {
+            Toast.makeText(
+                this,
+                "Login Button clicked!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     fun registerAccount(view: View) {
