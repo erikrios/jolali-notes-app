@@ -3,4 +3,5 @@
     <color name="colorPrimary">#35C17E</color>
     <color name="colorPrimaryDark">#38A872</color>
     <color name="colorAccent">#BF5B5B</color>
+    <color name="colorSplashScreenStatusBar">#BBC682</color>
 </resources>
