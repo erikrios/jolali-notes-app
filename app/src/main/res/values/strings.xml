@@ -2,6 +2,7 @@
     <string name="app_name">Jolali Notes</string>
     <string name="icon_name">JN</string>
     <string name="login">Login</string>
-    <string name="have_not_account">Haven\'t an account? <font color='#D4FF00'><u>Register</u></font></string>
+    <string name="have_not_account_register">Haven\'t an account? <u>Register</u></string>
+    <string name="have_not_account">Haven\'t an account?</string>
     <string name="register">Register</string>
 </resources>
