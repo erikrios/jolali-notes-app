@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_main"
     android:padding="16dp"
-    tools:context=".SplashScreenActivity">
+    tools:context=".SplashScreenActivity"
+    tools:viewBindingIgnore="true">
 
     <TextView
         android:id="@+id/tv_jolali_notes_logo"
