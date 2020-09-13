@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">JolaliNotes</string>
+    <string name="app_name">Jolali Notes</string>
+    <string name="icon_name">JN</string>
 </resources>
