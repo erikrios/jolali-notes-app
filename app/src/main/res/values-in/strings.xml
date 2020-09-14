@@ -15,4 +15,6 @@
     <string name="re_password_hint">Masukkan kembali kata sandi</string>
     <string name="title">Judul</string>
     <string name="description">Deskripsi</string>
+    <string name="delete">Hapus</string>
+    <string name="save">Simpan</string>
 </resources>
