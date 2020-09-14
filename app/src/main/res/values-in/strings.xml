@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Jolali Notes</string>
+    <string name="icon_name">JN</string>
+    <string name="login">Masuk</string>
+    <string name="have_not_account_register">Tidak punya akun? <u>Mendaftar</u></string>
+    <string name="have_not_account">Tidak punya akun?</string>
+    <string name="register">Mendaftar</string>
+    <string name="email_address">Alamat Email</string>
+    <string name="email_address_hint">Masukkan alamat email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="password_hint">Masukkan kata sandi</string>
+</resources>
