@@ -3,11 +3,7 @@
     <color name="colorPrimary">#35C17E</color>
     <color name="colorPrimaryDark">#38A872</color>
     <color name="colorAccent">#BF5B5B</color>
-    <color name="colorIconOne">#FF0000</color>
-    <color name="colorIconTwo">#FFA500</color>
-    <color name="colorIconThree">#FFFF00</color>
-    <color name="colorIconFour">#008000</color>
-    <color name="colorIconFive">#0000FF</color>
-    <color name="colorIconSix">#4B0082</color>
-    <color name="colorIconSeven">#EE82EE</color>
+    <color name="colorIconOne">#008000</color>
+    <color name="colorIconTwo">#0000FF</color>
+    <color name="colorIconThree">#4B0082</color>
 </resources>
