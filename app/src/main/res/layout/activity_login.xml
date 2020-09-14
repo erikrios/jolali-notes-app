@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tv_login"
-        style="@style/TextAppearance.AppCompat.Display3"
+        style="@style/TextAppearance.AppCompat.Display2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -22,10 +22,10 @@
 
     <TextView
         android:id="@+id/tv_email_address"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="@string/email_address"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@id/tv_login"
@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/tv_password"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -79,7 +79,7 @@
         android:paddingEnd="50dp"
         android:paddingBottom="10dp"
         android:text="@string/login"
-        android:textSize="30sp"
+        android:textSize="26sp"
         app:backgroundTint="#8FA232"
         app:layout_constraintBottom_toTopOf="@id/tv_have_not_account"
         app:layout_constraintEnd_toEndOf="parent"
