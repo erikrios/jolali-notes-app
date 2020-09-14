@@ -1,6 +1,7 @@
 package com.erikriosetiawan.jolalinotes.adapters
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -38,29 +39,64 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
             binding.tvDescription.text = note.description
             binding.tvDate.text = note.date
             binding.tvFirstCharacter.text = note.title[0].toString()
-            binding.imgIcon.circleBackgroundColor =
-                if (position + 1 % 7 == 0) ContextCompat.getColor(context, R.color.colorIconSeven)
-                else if (position + 1 % 6 == 0) ContextCompat.getColor(
-                    context,
-                    R.color.colorIconSix
+            binding.imgIcon.apply {
+                if ((position + 1) % 7 == 0) setImageDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorIconSeven
+                        )
+                    )
                 )
-                else if (position + 1 % 5 == 0) ContextCompat.getColor(
-                    context,
-                    R.color.colorIconFive
+                else if ((position + 1 % 6) == 0) setImageDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorIconSix
+                        )
+                    )
                 )
-                else if (position + 1 % 4 == 0) ContextCompat.getColor(
-                    context,
-                    R.color.colorIconFour
+                else if ((position + 1) % 5 == 0) setImageDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorIconFive
+                        )
+                    )
                 )
-                else if (position + 1 % 3 == 0) ContextCompat.getColor(
-                    context,
-                    R.color.colorIconThree
+                else if ((position + 1) % 4 == 0) setImageDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorIconFour
+                        )
+                    )
                 )
-                else if (position + 1 % 2 == 0) ContextCompat.getColor(
-                    context,
-                    R.color.colorIconTwo
+                else if ((position + 1) % 3 == 0) setImageDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorIconThree
+                        )
+                    )
                 )
-                else ContextCompat.getColor(context, R.color.colorIconOne)
+                else if ((position + 1) % 2 == 0) setImageDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorIconTwo
+                        )
+                    )
+                )
+                else setImageDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorIconOne
+                        )
+                    )
+                )
+            }
 
             itemView.setOnClickListener { clickListener?.let { it(note) } }
         }
