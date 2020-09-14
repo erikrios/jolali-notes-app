@@ -13,4 +13,6 @@
     <string name="full_name_hint">Masukkan nama lengkap</string>
     <string name="re_password">Ulangi Kata Sandi</string>
     <string name="re_password_hint">Masukkan kembali kata sandi</string>
+    <string name="title">Judul</string>
+    <string name="description">Deskripsi</string>
 </resources>
