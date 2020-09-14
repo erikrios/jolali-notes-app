@@ -40,30 +40,24 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
             binding.tvDate.text = note.date
             binding.tvFirstCharacter.text = note.title[0].toString()
             binding.imgIcon.apply {
-                if ((position + 1) % 3 == 0) setImageDrawable(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorIconThree
+                when {
+                    (position + 1) % 2 == 0 -> setImageDrawable(
+                        ColorDrawable(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.colorIconTwo
+                            )
                         )
                     )
-                )
-                else if ((position + 1 % 2) == 0) setImageDrawable(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorIconTwo
+                    else -> setImageDrawable(
+                        ColorDrawable(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.colorIconOne
+                            )
                         )
                     )
-                )
-                else setImageDrawable(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorIconOne
-                        )
-                    )
-                )
+                }
             }
 
             itemView.setOnClickListener { clickListener?.let { it(note) } }

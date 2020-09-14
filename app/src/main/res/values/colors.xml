@@ -4,6 +4,5 @@
     <color name="colorPrimaryDark">#38A872</color>
     <color name="colorAccent">#BF5B5B</color>
     <color name="colorIconOne">#008000</color>
-    <color name="colorIconTwo">#0000FF</color>
-    <color name="colorIconThree">#4B0082</color>
+    <color name="colorIconTwo">#4B0082</color>
 </resources>
