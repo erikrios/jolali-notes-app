@@ -18,4 +18,7 @@
     <string name="delete">Hapus</string>
     <string name="save">Simpan</string>
     <string name="profile">Profil</string>
+    <string name="name">Nama</string>
+    <string name="member_since">Anggota Sejak</string>
+    <string name="last_login">Terakhir Masuk</string>
 </resources>

@@ -18,4 +18,7 @@
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="profile">Profile</string>
+    <string name="name">Name</string>
+    <string name="member_since">Member Since</string>
+    <string name="last_login">Last Login</string>
 </resources>
