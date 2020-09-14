@@ -40,39 +40,7 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
             binding.tvDate.text = note.date
             binding.tvFirstCharacter.text = note.title[0].toString()
             binding.imgIcon.apply {
-                if ((position + 1) % 7 == 0) setImageDrawable(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorIconSeven
-                        )
-                    )
-                )
-                else if ((position + 1 % 6) == 0) setImageDrawable(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorIconSix
-                        )
-                    )
-                )
-                else if ((position + 1) % 5 == 0) setImageDrawable(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorIconFive
-                        )
-                    )
-                )
-                else if ((position + 1) % 4 == 0) setImageDrawable(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorIconFour
-                        )
-                    )
-                )
-                else if ((position + 1) % 3 == 0) setImageDrawable(
+                if ((position + 1) % 3 == 0) setImageDrawable(
                     ColorDrawable(
                         ContextCompat.getColor(
                             context,
@@ -80,7 +48,7 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
                         )
                     )
                 )
-                else if ((position + 1) % 2 == 0) setImageDrawable(
+                else if ((position + 1 % 2) == 0) setImageDrawable(
                     ColorDrawable(
                         ContextCompat.getColor(
                             context,
