@@ -9,28 +9,28 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_icon"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:src="#BF5B5B"
         app:civ_circle_background_color="#BF5B5B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="#BF5B5B" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_first_character"
-        style="@style/TextAppearance.AppCompat.Display4"
+        style="@style/TextAppearance.AppCompat.Display3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="E"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/img_icon"
         app:layout_constraintEnd_toEndOf="@id/img_icon"
         app:layout_constraintStart_toStartOf="@id/img_icon"
-        app:layout_constraintTop_toTopOf="@id/img_icon" />
+        app:layout_constraintTop_toTopOf="@id/img_icon"
+        tools:text="E" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -52,12 +52,12 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
-        android:text="Erik Rio Setiawan"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="Erik Rio Setiawan" />
 
     <View
         android:id="@+id/v_line_name"
@@ -88,12 +88,12 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
-        android:text="erikriosetiawan15@gmail.com"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_email"
-        app:layout_constraintTop_toBottomOf="@id/tv_email" />
+        app:layout_constraintTop_toBottomOf="@id/tv_email"
+        tools:text="erikriosetiawan15@gmail.com" />
 
     <View
         android:id="@+id/v_line_email"
@@ -124,12 +124,12 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
-        android:text="2020/09/14"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_member_since"
-        app:layout_constraintTop_toBottomOf="@id/tv_member_since" />
+        app:layout_constraintTop_toBottomOf="@id/tv_member_since"
+        tools:text="2020/09/14" />
 
     <View
         android:id="@+id/v_line_member_since"
@@ -160,12 +160,12 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
-        android:text="2020/09/14"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_last_login"
-        app:layout_constraintTop_toBottomOf="@id/tv_last_login" />
+        app:layout_constraintTop_toBottomOf="@id/tv_last_login"
+        tools:text="2020/09/14" />
 
     <View
         android:id="@+id/v_line_last_login"
