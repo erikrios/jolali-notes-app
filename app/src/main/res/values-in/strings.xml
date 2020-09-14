@@ -9,4 +9,8 @@
     <string name="email_address_hint">Masukkan alamat email</string>
     <string name="password">Kata Sandi</string>
     <string name="password_hint">Masukkan kata sandi</string>
+    <string name="full_name">Nama Lengkap</string>
+    <string name="full_name_hint">Masukkan nama lengkap</string>
+    <string name="re_password">Ulangi Kata Sandi</string>
+    <string name="re_password_hint">Masukkan kembali kata sandi</string>
 </resources>
