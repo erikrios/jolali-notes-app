@@ -30,15 +30,15 @@ class LoginFragment : Fragment() {
         binding?.btnLogin?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
         }
+
+        binding?.tvHaveNotAccount?.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun registerAccount(view: View) {
-        findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
     private fun setTextRegisterColor() {
