@@ -30,6 +30,10 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val notes = setDummyData()
         setRecyclerView(notes)
+
+        binding?.fabAdd?.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
+        }
     }
 
     override fun onDestroyView() {
