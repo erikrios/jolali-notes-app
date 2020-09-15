@@ -10,7 +10,9 @@
         android:label="SplashScreenFragment">
         <action
             android:id="@+id/action_splashScreenFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_splashScreenFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
