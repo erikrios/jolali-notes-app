@@ -19,6 +19,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
     // Declare the handler and runnable
     private var handler: Handler? = null
     private val runnable: Runnable = Runnable {
+        // Navigate into Login Fragment
         findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
     }
 
