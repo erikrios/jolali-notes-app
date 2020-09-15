@@ -15,7 +15,9 @@
             app:exitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_splashScreenFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
