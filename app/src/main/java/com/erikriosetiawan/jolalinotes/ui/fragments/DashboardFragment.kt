@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.adapters.NoteAdapter
 import com.erikriosetiawan.jolalinotes.databinding.FragmentDashboardBinding
 import com.erikriosetiawan.jolalinotes.models.Note
+import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
 
 class DashboardFragment : Fragment() {
 
@@ -23,6 +25,8 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+
+        (activity as AppCompatActivity).setCustomActionBar(binding?.toolbar, "")
         return binding?.root
     }
 
@@ -50,6 +54,15 @@ class DashboardFragment : Fragment() {
 
         binding?.rvNotes?.adapter = noteAdapter
     }
+
+//    private fun setSupportActionBar(toolbar: Toolbar?, title: String) {
+//        if (activity is AppCompatActivity) {
+//            (activity as AppCompatActivity).apply {
+//                setSupportActionBar(toolbar)
+//                supportActionBar?.title = title
+//            }
+//        }
+//    }
 
     private fun setDummyData(): List<Note> {
         val notes = mutableListOf<Note>()
