@@ -26,7 +26,7 @@ class DashboardFragment : Fragment() {
 
         setHasOptionsMenu(true)
         (activity as AppCompatActivity).setCustomActionBar(
-            binding?.toolbar,
+            binding?.toolbar?.root,
             context?.getString(R.string.my_notes)
         )
 

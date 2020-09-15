@@ -6,16 +6,14 @@
     android:layout_height="match_parent"
     android:background="#78B77A">
 
-    <androidx.appcompat.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical"
-        android:theme="@style/ToolBarStyle"
+        layout="@layout/toolbar"
         app:layout_constraintBottom_toTopOf="@id/img_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_icon"

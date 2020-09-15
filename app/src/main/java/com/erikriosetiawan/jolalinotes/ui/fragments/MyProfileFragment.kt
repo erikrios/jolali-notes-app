@@ -23,7 +23,7 @@ class MyProfileFragment : Fragment() {
         _binding = FragmentMyProfileBinding.inflate(inflater, container, false)
 
         (activity as AppCompatActivity).setCustomActionBar(
-            binding?.toolbar,
+            binding?.toolbar?.root,
             context?.getString(R.string.my_profile)
         )
 
