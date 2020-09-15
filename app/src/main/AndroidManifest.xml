@@ -19,9 +19,6 @@
         <activity android:name=".MyProfileActivity" />
         <activity android:name=".DetailsActivity" />
         <activity android:name=".DashboardActivity" />
-        <activity
-            android:name=".RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
