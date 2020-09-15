@@ -6,6 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import com.erikriosetiawan.jolalinotes.R
 
 class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
@@ -18,7 +19,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
     // Declare the handler and runnable
     private var handler: Handler? = null
     private val runnable: Runnable = Runnable {
-        // TODO Move to another fragment
+        findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
