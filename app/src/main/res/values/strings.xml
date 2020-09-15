@@ -22,4 +22,7 @@
     <string name="member_since">Member Since</string>
     <string name="last_login">Last Login</string>
     <string name="my_notes">My Notes</string>
+    <string name="my_profile">My Profile</string>
+    <string name="new_note">New Note</string>
+    <string name="update_note">Update Note</string>
 </resources>

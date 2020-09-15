@@ -22,4 +22,7 @@
     <string name="member_since">Anggota Sejak</string>
     <string name="last_login">Terakhir Masuk</string>
     <string name="my_notes">Catatan Ku</string>
+    <string name="my_profile">Profil Saya</string>
+    <string name="new_note">Catatan Baru</string>
+    <string name="update_note">Ubah Catatan</string>
 </resources>

@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.databinding.FragmentMyProfileBinding
+import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
 
 class MyProfileFragment : Fragment() {
 
@@ -18,6 +21,12 @@ class MyProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMyProfileBinding.inflate(inflater, container, false)
+
+        (activity as AppCompatActivity).setCustomActionBar(
+            binding?.toolbar,
+            context?.getString(R.string.my_profile)
+        )
+
         return binding?.root
     }
 

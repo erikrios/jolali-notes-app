@@ -5,10 +5,23 @@
     android:layout_height="match_parent"
     android:background="#78B77A">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:theme="@style/ToolBarStyle"
+        app:layout_constraintBottom_toTopOf="@id/et_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <EditText
         android:id="@+id/et_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:autofillHints="false"
         android:backgroundTint="@android:color/white"
         android:hint="@string/title"
@@ -21,7 +34,7 @@
         app:layout_constraintBottom_toTopOf="@id/et_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <EditText
         android:id="@+id/et_description"

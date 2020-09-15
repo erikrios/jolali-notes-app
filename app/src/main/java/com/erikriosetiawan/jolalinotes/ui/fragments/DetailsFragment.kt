@@ -3,9 +3,12 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.databinding.FragmentDetailsBinding
+import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
 
 class DetailsFragment : Fragment() {
 
@@ -18,6 +21,13 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).setCustomActionBar(
+            binding?.toolbar,
+            context?.getString(R.string.new_note)
+        )
+
         return binding?.root
     }
 

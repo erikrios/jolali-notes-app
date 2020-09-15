@@ -1,9 +1,7 @@
 package com.erikriosetiawan.jolalinotes.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -26,7 +24,12 @@ class DashboardFragment : Fragment() {
     ): View? {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
-        (activity as AppCompatActivity).setCustomActionBar(binding?.toolbar, "")
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).setCustomActionBar(
+            binding?.toolbar,
+            context?.getString(R.string.my_notes)
+        )
+
         return binding?.root
     }
 
@@ -45,6 +48,18 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_profile, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_profile -> findNavController().navigate(R.id.action_dashboardFragment_to_myProfileFragment)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setRecyclerView(notes: List<Note>) {
         val noteAdapter = context?.let { NoteAdapter(it, notes) }
         noteAdapter?.setOnItemClickListener { note ->
@@ -54,15 +69,6 @@ class DashboardFragment : Fragment() {
 
         binding?.rvNotes?.adapter = noteAdapter
     }
-
-//    private fun setSupportActionBar(toolbar: Toolbar?, title: String) {
-//        if (activity is AppCompatActivity) {
-//            (activity as AppCompatActivity).apply {
-//                setSupportActionBar(toolbar)
-//                supportActionBar?.title = title
-//            }
-//        }
-//    }
 
     private fun setDummyData(): List<Note> {
         val notes = mutableListOf<Note>()
