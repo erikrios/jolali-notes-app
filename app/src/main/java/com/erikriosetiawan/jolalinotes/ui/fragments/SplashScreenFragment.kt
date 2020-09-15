@@ -1,13 +1,14 @@
-package com.erikriosetiawan.jolalinotes.ui
+package com.erikriosetiawan.jolalinotes.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.erikriosetiawan.jolalinotes.R
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
 
     companion object {
         // Splash screen delay
@@ -17,18 +18,16 @@ class SplashScreenActivity : AppCompatActivity() {
     // Declare the handler and runnable
     private var handler: Handler? = null
     private val runnable: Runnable = Runnable {
-        // Start the MainActivity, add transition animation, adn finish the current activity
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-        finish()
+        // TODO Move to another fragment
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setTransparentStatusBar(activity)
+    }
 
-        setTransparentStatusBar()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Instantiate the handler
         handler = Handler()
@@ -45,8 +44,8 @@ class SplashScreenActivity : AppCompatActivity() {
     /**
      * Create transparent status bar
      */
-    private fun setTransparentStatusBar() {
-        window.setFlags(
+    private fun setTransparentStatusBar(activity: FragmentActivity?) {
+        activity?.window?.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
