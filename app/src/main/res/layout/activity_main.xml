@@ -6,4 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <fragment
+            android:id="@+id/notesNavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            tools:ignore="FragmentTagUsage" />
+        <!--            app:navGraph="@navigation/notes_nav_graph"-->
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
