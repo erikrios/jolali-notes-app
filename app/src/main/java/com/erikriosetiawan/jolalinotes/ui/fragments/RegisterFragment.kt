@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -23,6 +25,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.btnRegister?.setOnClickListener { findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment) }
     }
 
     override fun onDestroyView() {
