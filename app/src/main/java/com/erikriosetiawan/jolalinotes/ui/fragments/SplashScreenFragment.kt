@@ -3,9 +3,7 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.erikriosetiawan.jolalinotes.R
 
@@ -25,7 +23,6 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTransparentStatusBar(activity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,15 +38,5 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
         super.onDestroy()
         // Remove the runnable when activity completely cleared
         handler?.removeCallbacks(runnable)
-    }
-
-    /**
-     * Create transparent status bar
-     */
-    private fun setTransparentStatusBar(activity: FragmentActivity?) {
-        activity?.window?.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
     }
 }
