@@ -26,7 +26,7 @@
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

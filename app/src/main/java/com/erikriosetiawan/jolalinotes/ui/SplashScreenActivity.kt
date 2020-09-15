@@ -1,8 +1,9 @@
-package com.erikriosetiawan.jolalinotes
+package com.erikriosetiawan.jolalinotes.ui
 
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.erikriosetiawan.jolalinotes.R
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
