@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.adapters.NoteAdapter
 import com.erikriosetiawan.jolalinotes.databinding.FragmentDashboardBinding
 import com.erikriosetiawan.jolalinotes.models.Note
@@ -39,6 +41,7 @@ class DashboardFragment : Fragment() {
         val noteAdapter = context?.let { NoteAdapter(it, notes) }
         noteAdapter?.setOnItemClickListener { note ->
             Toast.makeText(context, note.title, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
         }
 
         binding?.rvNotes?.adapter = noteAdapter
