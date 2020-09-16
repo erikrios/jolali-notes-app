@@ -9,4 +9,6 @@ class NotesRepository {
 
     fun registerUser(name: String, email: String, password: String) =
         notesService.registerUser(name, email, password)
+
+    fun getUserDetails(token: String) = notesService.getUserDetails(token)
 }
