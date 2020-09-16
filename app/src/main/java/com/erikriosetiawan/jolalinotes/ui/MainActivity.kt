@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.erikriosetiawan.jolalinotes.R
+import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
 import retrofit2.Call
@@ -72,10 +73,29 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val headers = response.headers()
                     token = headers["Auth-Token"]
+
+                    token?.let { createNote(it, "Test Note 1", "Test Description 1") }
+                    token?.let { createNote(it, "Test Note 2", "Test Description 2") }
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun createNote(token: String, title: String, description: String) {
+        val requestCall = repository.createNote(token, title, description)
+        requestCall.enqueue(object : Callback<Note> {
+            override fun onResponse(call: Call<Note>, response: Response<Note>) {
+                if (response.isSuccessful) {
+                    val note = response.body()
+                    Log.i("API Body Response", note.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<Note>, t: Throwable) {
                 t.printStackTrace()
             }
         })
