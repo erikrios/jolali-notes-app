@@ -81,6 +81,8 @@ class MainActivity : AppCompatActivity() {
                     token?.let { createNote(it, "Test Note 2", "Test Description 2") }
                     GlobalScope.launch {
                         delay(10000L)
+
+                        token?.let { getNotes(it) }
                     }
                 }
             }
@@ -116,10 +118,28 @@ class MainActivity : AppCompatActivity() {
                     notes?.forEach {
                         Log.i("API Body Response", it.toString())
                     }
+
+                    notes?.get(1)?._id?.let { getNote(it, token) }
                 }
             }
 
             override fun onFailure(call: Call<List<Note>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun getNote(id: String, token: String) {
+        val requestCall = repository.getNote(id, token)
+        requestCall.enqueue(object : Callback<Note> {
+            override fun onResponse(call: Call<Note>, response: Response<Note>) {
+                if (response.isSuccessful) {
+                    val note = response.body()
+                    Log.i("API Body Response", note.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<Note>, t: Throwable) {
                 t.printStackTrace()
             }
         })
