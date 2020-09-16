@@ -11,7 +11,7 @@ interface NotesService {
      * POST Request to register a user
      */
     @POST("api/users")
-    suspend fun registerUser(
+    fun registerUser(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
