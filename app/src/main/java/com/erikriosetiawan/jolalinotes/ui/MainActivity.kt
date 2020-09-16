@@ -1,15 +1,11 @@
 package com.erikriosetiawan.jolalinotes.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         repository = NotesRepository()
 
-        registerUser("Erik Android", "erikandroid@gmail.com", "Erik1997")
     }
 
     private fun registerUser(name: String, email: String, password: String) {
@@ -36,13 +31,10 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val user = response.body()
-                    Log.i("API Body Response", user.toString())
 
                     // Get headers
                     val headers = response.headers()
                     token = headers["Auth-Token"]
-
-                    token?.let { getUserDetails(it) }
                 }
             }
 
@@ -58,9 +50,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val user = response.body()
-                    Log.i("API Body Response", user.toString())
-
-                    authenticateUser("erikandroid@gmail.com", "Erik1997")
                 }
             }
 
@@ -77,14 +66,6 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val headers = response.headers()
                     token = headers["Auth-Token"]
-
-//                    token?.let { createNote(it, "Test Note 1", "Test Description 1") }
-//                    token?.let { createNote(it, "Test Note 2", "Test Description 2") }
-//                    GlobalScope.launch {
-//                        delay(10000L)
-//
-//                        token?.let { getNotes(it) }
-//                    }
                 }
             }
 
@@ -100,7 +81,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Note>, response: Response<Note>) {
                 if (response.isSuccessful) {
                     val note = response.body()
-                    Log.i("API Body Response", note.toString())
                 }
             }
 
@@ -116,11 +96,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Note>>, response: Response<List<Note>>) {
                 if (response.isSuccessful) {
                     notes = response.body() as MutableList<Note>
-                    notes.forEach {
-                        Log.i("API Body Response", it.toString())
-                    }
-
-                    getNote(notes[1]._id, token)
                 }
             }
 
@@ -136,16 +111,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Note>, response: Response<Note>) {
                 if (response.isSuccessful) {
                     val note = response.body()
-                    Log.i("API Body Response", note.toString())
-
-                    note?._id?.let {
-                        updateNote(
-                            it,
-                            token,
-                            "Test Note 2 Update",
-                            "Test Description 2 Update"
-                        )
-                    }
                 }
             }
 
@@ -161,9 +126,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Note>, response: Response<Note>) {
                 if (response.isSuccessful) {
                     val note = response.body()
-                    Log.i("API Body Response", note.toString())
-
-                    deleteNote(notes[0]._id, token)
                 }
             }
 
@@ -179,8 +141,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Note>, response: Response<Note>) {
                 if (response.isSuccessful) {
                     val note = response.body()
-
-                    Log.i("API Body Response", note.toString())
                 }
             }
 
