@@ -136,7 +136,30 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val note = response.body()
                     Log.i("API Body Response", note.toString())
+
+                    note?._id?.let {
+                        updateNote(
+                            it,
+                            token,
+                            "Test Note 2 Update",
+                            "Test Description 2 Update"
+                        )
+                    }
                 }
+            }
+
+            override fun onFailure(call: Call<Note>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun updateNote(id: String, token: String, title: String, description: String) {
+        val requestCall = repository.updateNote(id, token, title, description)
+        requestCall.enqueue(object : Callback<Note> {
+            override fun onResponse(call: Call<Note>, response: Response<Note>) {
+                val note = response.body()
+                Log.i("API Body Response", note.toString())
             }
 
             override fun onFailure(call: Call<Note>, t: Throwable) {
