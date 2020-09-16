@@ -1,4 +1,4 @@
-package com.erikriosetiawan.jolalinotes.api
+package com.erikriosetiawan.jolalinotes.services
 
 import com.erikriosetiawan.jolalinotes.models.User
 import retrofit2.Call
