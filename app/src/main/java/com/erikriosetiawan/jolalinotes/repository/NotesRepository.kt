@@ -11,4 +11,7 @@ class NotesRepository {
         notesService.registerUser(name, email, password)
 
     fun getUserDetails(token: String) = notesService.getUserDetails(token)
+
+    fun authenticateUser(email: String, password: String) =
+        notesService.authenticateUser(email, password)
 }

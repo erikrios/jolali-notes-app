@@ -25,4 +25,14 @@ interface NotesService {
         @Header("Auth-Token")
         token: String
     ): Call<User>
+
+    /**
+     * Check the user login
+     */
+    @POST("api/auth")
+    @FormUrlEncoded
+    fun authenticateUser(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Call<String>
 }
