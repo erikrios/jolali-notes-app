@@ -3,6 +3,7 @@ package com.erikriosetiawan.jolalinotes.services
 import android.annotation.SuppressLint
 import android.os.Build
 import com.erikriosetiawan.jolalinotes.BuildConfig
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -37,6 +38,11 @@ object ServiceBuilder {
         }
     }
 
+    // Create GSON Builder
+    private val gson = GsonBuilder()
+        .setLenient()
+        .create()
+
     // Create OkHttp Client
     private val okHttp = OkHttpClient.Builder()
         .callTimeout(25, TimeUnit.SECONDS)
@@ -45,7 +51,7 @@ object ServiceBuilder {
 
     // Create Retrofit Builder
     private val builder = Retrofit.Builder().baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttp.build())
 
     // Create Retrofit Instance

@@ -78,13 +78,13 @@ class MainActivity : AppCompatActivity() {
                     val headers = response.headers()
                     token = headers["Auth-Token"]
 
-                    token?.let { createNote(it, "Test Note 1", "Test Description 1") }
-                    token?.let { createNote(it, "Test Note 2", "Test Description 2") }
-                    GlobalScope.launch {
-                        delay(10000L)
-
-                        token?.let { getNotes(it) }
-                    }
+//                    token?.let { createNote(it, "Test Note 1", "Test Description 1") }
+//                    token?.let { createNote(it, "Test Note 2", "Test Description 2") }
+//                    GlobalScope.launch {
+//                        delay(10000L)
+//
+//                        token?.let { getNotes(it) }
+//                    }
                 }
             }
 
