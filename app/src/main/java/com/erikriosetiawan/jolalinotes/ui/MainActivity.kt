@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         repository = NotesRepository()
 
-        registerUser("User Test 2", "usertest2@gmail.com", "test1234")
+        registerUser("Erik Android", "erikandroid@gmail.com", "Erik1997")
     }
 
     private fun registerUser(name: String, email: String, password: String) {
@@ -54,10 +54,28 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val user = response.body()
                     Log.i("API Body Response", user.toString())
+
+                    authenticateUser("erikandroid@gmail.com", "Erik1997")
                 }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun authenticateUser(email: String, password: String) {
+        val requestCall = repository.authenticateUser(email, password)
+        requestCall.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    val headers = response.headers()
+                    token = headers["Auth-Token"]
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
                 t.printStackTrace()
             }
         })
