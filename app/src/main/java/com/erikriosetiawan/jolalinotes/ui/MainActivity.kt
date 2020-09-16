@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var repository: NotesRepository
     private var token: String? = ""
+    private var notes = mutableListOf<Note>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,12 +115,12 @@ class MainActivity : AppCompatActivity() {
         requestCall.enqueue(object : Callback<List<Note>> {
             override fun onResponse(call: Call<List<Note>>, response: Response<List<Note>>) {
                 if (response.isSuccessful) {
-                    val notes = response.body()
-                    notes?.forEach {
+                    notes = response.body() as MutableList<Note>
+                    notes.forEach {
                         Log.i("API Body Response", it.toString())
                     }
 
-                    notes?.get(1)?._id?.let { getNote(it, token) }
+                    getNote(notes[1]._id, token)
                 }
             }
 
@@ -158,8 +159,29 @@ class MainActivity : AppCompatActivity() {
         val requestCall = repository.updateNote(id, token, title, description)
         requestCall.enqueue(object : Callback<Note> {
             override fun onResponse(call: Call<Note>, response: Response<Note>) {
-                val note = response.body()
-                Log.i("API Body Response", note.toString())
+                if (response.isSuccessful) {
+                    val note = response.body()
+                    Log.i("API Body Response", note.toString())
+
+                    deleteNote(notes[0]._id, token)
+                }
+            }
+
+            override fun onFailure(call: Call<Note>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun deleteNote(id: String, token: String) {
+        val requestCall = repository.deleteNote(id, token)
+        requestCall.enqueue(object : Callback<Note> {
+            override fun onResponse(call: Call<Note>, response: Response<Note>) {
+                if (response.isSuccessful) {
+                    val note = response.body()
+
+                    Log.i("API Body Response", note.toString())
+                }
             }
 
             override fun onFailure(call: Call<Note>, t: Throwable) {
