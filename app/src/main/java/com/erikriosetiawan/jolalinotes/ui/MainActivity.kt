@@ -7,6 +7,9 @@ import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -76,6 +79,9 @@ class MainActivity : AppCompatActivity() {
 
                     token?.let { createNote(it, "Test Note 1", "Test Description 1") }
                     token?.let { createNote(it, "Test Note 2", "Test Description 2") }
+                    GlobalScope.launch {
+                        delay(10000L)
+                    }
                 }
             }
 
@@ -96,6 +102,24 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Note>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun getNotes(token: String) {
+        val requestCall = repository.getNotes(token)
+        requestCall.enqueue(object : Callback<List<Note>> {
+            override fun onResponse(call: Call<List<Note>>, response: Response<List<Note>>) {
+                if (response.isSuccessful) {
+                    val notes = response.body()
+                    notes?.forEach {
+                        Log.i("API Body Response", it.toString())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Note>>, t: Throwable) {
                 t.printStackTrace()
             }
         })
