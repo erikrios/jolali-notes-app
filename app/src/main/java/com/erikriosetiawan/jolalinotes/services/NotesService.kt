@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.POST
 
-interface NotesAPI {
+interface NotesService {
 
     /**
      * POST Request to register a user
