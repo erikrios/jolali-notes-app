@@ -55,7 +55,7 @@ class LoginFragment : Fragment() {
 
             if (isValid) {
                 viewModel.authenticateUser(email, password).invokeOnCompletion {
-                    if (!isLoading && token != null && (exception == null))
+                    if (!isLoading && (token != null) && (exception == null))
                         findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
                 }
             }
