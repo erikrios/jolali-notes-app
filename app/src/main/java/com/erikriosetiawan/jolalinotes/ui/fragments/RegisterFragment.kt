@@ -2,6 +2,7 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -133,6 +134,9 @@ class RegisterFragment : Fragment() {
             binding?.etEmailAddress?.error = getString(R.string.empty_email_error)
             isEmpty = true
         } else if (email.length < 5 || email.length > 255) {
+            binding?.etEmailAddress?.error = getString(R.string.invalid_email_error)
+            isInvalid = true
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding?.etEmailAddress?.error = getString(R.string.invalid_email_error)
             isInvalid = true
         }
