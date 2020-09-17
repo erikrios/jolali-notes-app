@@ -21,10 +21,9 @@ import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_AUTH_TOKEN
 
 class RegisterFragment : Fragment() {
 
-    private lateinit var viewModel: RegisterViewModel
-
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding
+    private lateinit var viewModel: RegisterViewModel
     private var isLoading = false
     private var token: String? = null
     private var exception: Exception? = null
@@ -35,16 +34,32 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+
+        val factory = RegisterViewModelFactory(NotesRepository())
+        viewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java).apply {
+            viewState.observe(viewLifecycleOwner, Observer(this@RegisterFragment::handleState))
+        }
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.btnRegister?.setOnClickListener { findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment) }
 
-        val factory = RegisterViewModelFactory(NotesRepository())
-        viewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java).apply {
-            viewState.observe(viewLifecycleOwner, Observer(this@RegisterFragment::handleState))
+        binding?.btnRegister?.setOnClickListener {
+            val name = binding?.etFullName?.text.toString()
+            val email = binding?.etEmailAddress?.text.toString()
+            val password = binding?.etPassword?.text.toString()
+            val rePassword = binding?.etRePassword?.text.toString()
+
+            val isValid = validate(name, email, password, rePassword)
+
+            if (isValid) {
+                viewModel.registerUser(name, email, password).invokeOnCompletion {
+                    if (!isLoading && (token != null) && (exception == null)) {
+                        findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
+                    }
+                }
+            }
         }
     }
 
