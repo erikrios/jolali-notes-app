@@ -95,4 +95,58 @@ class RegisterFragment : Fragment() {
         val sharedPref = activity?.getSharedPreferences(PREF_AUTH_TOKEN, MODE_PRIVATE)
         sharedPref?.edit { putString(PREF_AUTH_TOKEN, token) }
     }
+
+    private fun validate(
+        name: String,
+        email: String,
+        password: String,
+        rePassword: String
+    ): Boolean {
+        var isEmpty = false
+        var isInvalid = false
+
+        if (name.isEmpty()) {
+            binding?.etFullName?.error = getString(R.string.empty_name_error)
+            isEmpty = true
+        } else if (name.length < 5 || name.length > 50) {
+            binding?.etFullName?.error = getString(R.string.invalid_name_error)
+            isInvalid = true
+        }
+
+        if (email.isEmpty()) {
+            binding?.etEmailAddress?.error = getString(R.string.empty_email_error)
+            isEmpty = true
+        } else if (email.length < 5 || email.length > 255) {
+            binding?.etEmailAddress?.error = getString(R.string.invalid_email_error)
+            isInvalid = true
+        }
+
+        if (password.isEmpty()) {
+            binding?.etPassword?.error = getString(R.string.empty_password_error)
+            isEmpty = true
+        } else if (password.length < 5 || password.length > 1024) {
+            binding?.etPassword?.error = getString(R.string.invalid_password_error)
+            isInvalid = true
+        }
+
+        if (rePassword.isEmpty()) {
+            binding?.etRePassword?.error = getString(R.string.empty_password_error)
+            isEmpty = true
+        } else if (rePassword.length < 5 || rePassword.length > 1024) {
+            binding?.etRePassword?.error = getString(R.string.invalid_password_error)
+            isInvalid = true
+        }
+
+        if (password != rePassword) {
+            binding?.etPassword?.error = getString(R.string.password_not_match_error)
+            binding?.etRePassword?.error = getString(R.string.password_not_match_error)
+            isInvalid = true
+        }
+
+        if (!isEmpty && !isInvalid) {
+            return true
+        }
+
+        return false
+    }
 }
