@@ -7,23 +7,23 @@ class NotesRepository {
 
     private val notesService = ServiceBuilder.buildService(NotesService::class.java)
 
-    fun registerUser(name: String, email: String, password: String) =
+    suspend fun registerUser(name: String, email: String, password: String) =
         notesService.registerUser(name, email, password)
 
-    fun getUserDetails(token: String) = notesService.getUserDetails(token)
+    suspend fun getUserDetails(token: String) = notesService.getUserDetails(token)
 
     suspend fun authenticateUser(email: String, password: String) =
         notesService.authenticateUser(email, password)
 
-    fun createNote(token: String, title: String, description: String) =
+    suspend fun createNote(token: String, title: String, description: String) =
         notesService.createNote(token, title, description)
 
-    fun getNotes(token: String) = notesService.getNotes(token)
+    suspend fun getNotes(token: String) = notesService.getNotes(token)
 
-    fun getNote(id: String, token: String) = notesService.getNote(id, token)
+    suspend fun getNote(id: String, token: String) = notesService.getNote(id, token)
 
-    fun updateNote(id: String, token: String, title: String, description: String) =
+    suspend fun updateNote(id: String, token: String, title: String, description: String) =
         notesService.updateNote(id, token, title, description)
 
-    fun deleteNote(id: String, token: String) = notesService.deleteNote(id, token)
+    suspend fun deleteNote(id: String, token: String) = notesService.deleteNote(id, token)
 }
