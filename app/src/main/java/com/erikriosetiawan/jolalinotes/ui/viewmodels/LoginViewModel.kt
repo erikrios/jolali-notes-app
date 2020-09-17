@@ -12,12 +12,14 @@ import retrofit2.Response
 class LoginViewModel(private val repository: NotesRepository) : ViewModel() {
 
     private val _viewState = MutableLiveData<LoginViewState>().apply {
-        value = LoginViewState(loading = true)
+        value = LoginViewState(loading = false)
     }
     val viewState: LiveData<LoginViewState>
         get() = _viewState
 
     fun authenticateUser(email: String, password: String) {
+        _viewState.value = LoginViewState(loading = true)
+
         val requestCall = repository.authenticateUser(email, password)
         requestCall.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
