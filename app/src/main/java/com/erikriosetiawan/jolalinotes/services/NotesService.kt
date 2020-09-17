@@ -12,7 +12,7 @@ interface NotesService {
      */
     @POST("api/users")
     @FormUrlEncoded
-    fun registerUser(
+    suspend fun registerUser(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
@@ -22,7 +22,7 @@ interface NotesService {
      * GET Request to get the user details
      */
     @GET("api/users/me")
-    fun getUserDetails(
+    suspend fun getUserDetails(
         @Header("Auth-Token")
         token: String
     ): Response<User>
@@ -42,7 +42,7 @@ interface NotesService {
      */
     @POST("api/notes")
     @FormUrlEncoded
-    fun createNote(
+    suspend fun createNote(
         @Header("Auth-Token") token: String,
         @Field("title") title: String,
         @Field("description") description: String
@@ -52,7 +52,7 @@ interface NotesService {
      * Get all notes
      */
     @GET("api/notes")
-    fun getNotes(
+    suspend fun getNotes(
         @Header("Auth-Token") token: String
     ): Response<List<Note>>
 
@@ -60,7 +60,7 @@ interface NotesService {
      * Get a note by id
      */
     @GET("api/notes/{id}")
-    fun getNote(
+    suspend fun getNote(
         @Path("id") id: String,
         @Header("Auth-Token") token: String
     ): Response<Note>
@@ -70,7 +70,7 @@ interface NotesService {
      */
     @PUT("api/notes/{id}")
     @FormUrlEncoded
-    fun updateNote(
+    suspend fun updateNote(
         @Path("id") id: String,
         @Header("Auth-Token") token: String,
         @Field("title") title: String,
@@ -81,7 +81,7 @@ interface NotesService {
      * Delete a note
      */
     @DELETE("api/notes/{id}")
-    fun deleteNote(
+    suspend fun deleteNote(
         @Path("id") id: String,
         @Header("Auth-Token") token: String
     ): Response<Note>
