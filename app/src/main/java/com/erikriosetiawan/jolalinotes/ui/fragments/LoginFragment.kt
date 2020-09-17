@@ -116,19 +116,15 @@ class LoginFragment : Fragment() {
         if (email.isEmpty()) {
             binding?.etEmailAddress?.error = getString(R.string.empty_email_error)
             isEmpty = true
+        } else if (email.length < 5 || email.length > 255) {
+            binding?.etEmailAddress?.error = getString(R.string.invalid_email_error)
+            isInvalid = true
         }
 
         if (password.isEmpty()) {
             binding?.etPassword?.error = getString(R.string.empty_password_error)
             isEmpty = true
-        }
-
-        if (email.length < 5 || email.length > 255) {
-            binding?.etEmailAddress?.error = getString(R.string.invalid_email_error)
-            isInvalid = true
-        }
-
-        if (password.length < 5 || password.length > 1024) {
+        } else if (password.length < 5 || password.length > 1024) {
             binding?.etPassword?.error = getString(R.string.invalid_password_error)
             isInvalid = true
         }
