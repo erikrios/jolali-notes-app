@@ -8,7 +8,7 @@ import com.erikriosetiawan.jolalinotes.repository.NotesRepository
 class LoginViewModelFactory(private val repository: NotesRepository) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LoginViewModelFactory::class.java)) {
+        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(repository) as T
         }
 
