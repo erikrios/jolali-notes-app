@@ -25,4 +25,8 @@
     <string name="my_profile">My Profile</string>
     <string name="new_note">New Note</string>
     <string name="update_note">Update Note</string>
+    <string name="empty_email_error">Email is required</string>
+    <string name="empty_password_error">Password is required</string>
+    <string name="invalid_email_error">Invalid Email</string>
+    <string name="invalid_password_error">Invalid Password</string>
 </resources>

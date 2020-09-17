@@ -25,4 +25,8 @@
     <string name="my_profile">Profil Saya</string>
     <string name="new_note">Catatan Baru</string>
     <string name="update_note">Ubah Catatan</string>
+    <string name="empty_email_error">Email wajib diisi</string>
+    <string name="empty_password_error">Password wajib diisi</string>
+    <string name="invalid_email_error">Email tidak valid</string>
+    <string name="invalid_password_error">Password tidak valid</string>
 </resources>
