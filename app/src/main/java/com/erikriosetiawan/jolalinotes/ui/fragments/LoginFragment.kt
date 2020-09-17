@@ -1,10 +1,13 @@
 package com.erikriosetiawan.jolalinotes.ui.fragments
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,11 +18,14 @@ import com.erikriosetiawan.jolalinotes.repository.NotesRepository
 import com.erikriosetiawan.jolalinotes.ui.viewmodels.LoginViewModel
 import com.erikriosetiawan.jolalinotes.ui.viewmodels.LoginViewModelFactory
 import com.erikriosetiawan.jolalinotes.ui.viewstate.LoginViewState
+import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_AUTH_TOKEN
+import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_FILE_KEY
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +35,7 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         val factory = LoginViewModelFactory(NotesRepository())
-        val viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java).apply {
+        viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java).apply {
             viewState.observe(viewLifecycleOwner, Observer(this@LoginFragment::handleState))
         }
         return binding?.root
@@ -53,9 +59,34 @@ class LoginFragment : Fragment() {
     }
 
     private fun handleState(viewState: LoginViewState?) {
-        viewState?.let {
-
+        viewState?.let { loginViewState ->
+            showLoading(loginViewState.loading)
+            loginViewState.token?.let { saveToken(it) }
+            loginViewState.exception?.let { showError(it) }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.apply {
+                btnLogin.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+            }
+        } else {
+            binding?.apply {
+                btnLogin.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showError(exception: Exception) {
+        Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveToken(token: String?) {
+        val sharedPref = activity?.getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
+        sharedPref?.edit { putString(PREF_AUTH_TOKEN, token) }
     }
 
     private fun setTextRegisterColor() {
