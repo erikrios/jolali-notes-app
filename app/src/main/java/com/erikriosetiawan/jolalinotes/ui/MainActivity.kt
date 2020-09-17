@@ -1,11 +1,13 @@
 package com.erikriosetiawan.jolalinotes.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
+import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_TOKEN
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,8 +22,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        repository = NotesRepository()
+        val sharedPref: SharedPreferences = getSharedPreferences(PREF_TOKEN, MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putString(PREF_TOKEN, "")
+        editor.apply()
 
+        repository = NotesRepository()
     }
 
     private fun registerUser(name: String, email: String, password: String) {
