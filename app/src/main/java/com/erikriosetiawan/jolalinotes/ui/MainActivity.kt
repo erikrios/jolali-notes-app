@@ -7,7 +7,8 @@ import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
-import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_TOKEN
+import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_AUTH_TOKEN
+import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_FILE_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPref: SharedPreferences = getSharedPreferences(PREF_TOKEN, MODE_PRIVATE)
+        val sharedPref: SharedPreferences = getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putString(PREF_TOKEN, "")
+        editor.putString(PREF_AUTH_TOKEN, "")
         editor.apply()
 
         repository = NotesRepository()
