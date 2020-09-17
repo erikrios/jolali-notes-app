@@ -3,7 +3,7 @@ package com.erikriosetiawan.jolalinotes.ui
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.erikriosetiawan.jolalinotes.R
+import com.erikriosetiawan.jolalinotes.databinding.ActivityMainBinding
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
@@ -15,13 +15,16 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     private lateinit var repository: NotesRepository
     private var token: String? = ""
     private var notes = mutableListOf<Note>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
         val editor = sharedPref.edit()
