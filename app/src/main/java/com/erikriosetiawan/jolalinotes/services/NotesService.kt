@@ -2,7 +2,6 @@ package com.erikriosetiawan.jolalinotes.services
 
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -17,7 +16,7 @@ interface NotesService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<User>
+    ): Response<User>
 
     /**
      * GET Request to get the user details
@@ -26,7 +25,7 @@ interface NotesService {
     fun getUserDetails(
         @Header("Auth-Token")
         token: String
-    ): Call<User>
+    ): Response<User>
 
     /**
      * Check the user login
@@ -47,7 +46,7 @@ interface NotesService {
         @Header("Auth-Token") token: String,
         @Field("title") title: String,
         @Field("description") description: String
-    ): Call<Note>
+    ): Response<Note>
 
     /**
      * Get all notes
@@ -55,7 +54,7 @@ interface NotesService {
     @GET("api/notes")
     fun getNotes(
         @Header("Auth-Token") token: String
-    ): Call<List<Note>>
+    ): Response<List<Note>>
 
     /**
      * Get a note by id
@@ -64,7 +63,7 @@ interface NotesService {
     fun getNote(
         @Path("id") id: String,
         @Header("Auth-Token") token: String
-    ): Call<Note>
+    ): Response<Note>
 
     /**
      * Update a note
@@ -76,7 +75,7 @@ interface NotesService {
         @Header("Auth-Token") token: String,
         @Field("title") title: String,
         @Field("description") description: String
-    ): Call<Note>
+    ): Response<Note>
 
     /**
      * Delete a note
@@ -85,5 +84,5 @@ interface NotesService {
     fun deleteNote(
         @Path("id") id: String,
         @Header("Auth-Token") token: String
-    ): Call<Note>
+    ): Response<Note>
 }
