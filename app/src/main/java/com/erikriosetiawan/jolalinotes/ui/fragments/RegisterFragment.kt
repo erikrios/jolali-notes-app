@@ -18,6 +18,7 @@ import com.erikriosetiawan.jolalinotes.ui.viewmodels.RegisterViewModel
 import com.erikriosetiawan.jolalinotes.ui.viewmodels.RegisterViewModelFactory
 import com.erikriosetiawan.jolalinotes.ui.viewstate.RegisterViewState
 import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_AUTH_TOKEN
+import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_FILE_KEY
 
 class RegisterFragment : Fragment() {
 
@@ -107,7 +108,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun saveToken(token: String?) {
-        val sharedPref = activity?.getSharedPreferences(PREF_AUTH_TOKEN, MODE_PRIVATE)
+        val sharedPref = activity?.getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
         sharedPref?.edit { putString(PREF_AUTH_TOKEN, token) }
     }
 
