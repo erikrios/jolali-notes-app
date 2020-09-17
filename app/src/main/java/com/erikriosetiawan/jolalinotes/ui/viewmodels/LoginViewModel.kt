@@ -1,13 +1,14 @@
 package com.erikriosetiawan.jolalinotes.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
 import com.erikriosetiawan.jolalinotes.ui.viewstate.LoginViewState
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: NotesRepository) : ViewModel() {
 
@@ -17,12 +18,14 @@ class LoginViewModel(private val repository: NotesRepository) : ViewModel() {
     val viewState: LiveData<LoginViewState>
         get() = _viewState
 
-    fun authenticateUser(email: String, password: String) {
-        _viewState.value = LoginViewState(loading = true)
+    fun authenticateUser(email: String, password: String): Job {
+        return viewModelScope.launch {
 
-        val requestCall = repository.authenticateUser(email, password)
-        requestCall.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+            _viewState.value = LoginViewState(loading = true)
+
+            try {
+                val response = repository.authenticateUser(email, password)
+
                 when {
                     response.isSuccessful -> {
                         _viewState.value = LoginViewState(
@@ -46,15 +49,13 @@ class LoginViewModel(private val repository: NotesRepository) : ViewModel() {
                         )
                     }
                 }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                t.printStackTrace()
+            } catch (e: Exception) {
+                e.printStackTrace()
                 _viewState.value = LoginViewState(
                     loading = false,
-                    exception = Exception(t)
+                    exception = Exception(e)
                 )
             }
-        })
+        }
     }
 }

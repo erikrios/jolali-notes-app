@@ -12,7 +12,7 @@ class NotesRepository {
 
     fun getUserDetails(token: String) = notesService.getUserDetails(token)
 
-    fun authenticateUser(email: String, password: String) =
+    suspend fun authenticateUser(email: String, password: String) =
         notesService.authenticateUser(email, password)
 
     fun createNote(token: String, title: String, description: String) =

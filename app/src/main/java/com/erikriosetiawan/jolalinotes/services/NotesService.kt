@@ -3,6 +3,7 @@ package com.erikriosetiawan.jolalinotes.services
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface NotesService {
@@ -32,10 +33,10 @@ interface NotesService {
      */
     @POST("api/auth")
     @FormUrlEncoded
-    fun authenticateUser(
+    suspend fun authenticateUser(
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<String>
+    ): Response<String>
 
     /**
      * Create a note

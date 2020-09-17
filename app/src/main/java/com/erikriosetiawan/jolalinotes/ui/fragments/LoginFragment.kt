@@ -3,6 +3,7 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,9 +54,11 @@ class LoginFragment : Fragment() {
 
             val isValid = validate(email, password)
             if (isValid) {
-                viewModel.authenticateUser(email, password)
-                if (!isLoading && token.toString().isNotEmpty() && (exception == null))
-                    findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+                viewModel.authenticateUser(email, password).invokeOnCompletion {
+                    Log.d("Check", "$isLoading ${token.toString()} ${it == null}")
+                    if (!isLoading && token.toString().isNotEmpty() && (it == null))
+                        findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+                }
             }
         }
 

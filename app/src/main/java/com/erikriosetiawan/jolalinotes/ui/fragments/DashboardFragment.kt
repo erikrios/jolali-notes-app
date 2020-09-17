@@ -11,6 +11,7 @@ import com.erikriosetiawan.jolalinotes.adapters.NoteAdapter
 import com.erikriosetiawan.jolalinotes.databinding.FragmentDashboardBinding
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.NoteOwner
+import com.erikriosetiawan.jolalinotes.utils.getToken
 import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
 
 class DashboardFragment : Fragment() {
@@ -38,6 +39,10 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val notes = setDummyData()
         setRecyclerView(notes)
+
+        val token = getToken().toString()
+
+        Toast.makeText(context, token, Toast.LENGTH_SHORT).show()
 
         binding?.fabAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)

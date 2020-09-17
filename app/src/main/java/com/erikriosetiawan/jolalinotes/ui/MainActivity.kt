@@ -1,13 +1,11 @@
 package com.erikriosetiawan.jolalinotes.ui
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.erikriosetiawan.jolalinotes.databinding.ActivityMainBinding
 import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.User
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
-import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_AUTH_TOKEN
 import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_FILE_KEY
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,10 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sharedPref: SharedPreferences = getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putString(PREF_AUTH_TOKEN, "")
-        editor.apply()
+        getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
 
         repository = NotesRepository()
     }
