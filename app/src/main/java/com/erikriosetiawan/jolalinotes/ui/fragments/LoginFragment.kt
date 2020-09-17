@@ -3,6 +3,7 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,10 +56,9 @@ class LoginFragment : Fragment() {
 
             if (isValid) {
                 viewModel.authenticateUser(email, password).invokeOnCompletion {
-                    if (!isLoading && token.toString().isNotEmpty() && (it == null))
+                    Log.d("Tes", "$isLoading, $token, ${exception?.message}")
+                    if (!isLoading && token != null && (exception == null))
                         findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
-                    else
-                        Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -78,13 +78,13 @@ class LoginFragment : Fragment() {
             isLoading = loginViewState.loading
             showLoading(isLoading)
 
-            loginViewState.token?.let {
-                token = it
+            loginViewState.token.apply {
+                token = this
                 saveToken(token)
             }
 
-            loginViewState.exception?.let {
-                exception = it
+            loginViewState.exception.apply {
+                exception = this
                 showError(exception)
             }
         }
@@ -105,7 +105,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun showError(exception: Exception?) {
-        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
+        if (exception != null)
+            Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
     }
 
     private fun saveToken(token: String?) {
