@@ -59,22 +59,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun authenticateUser(email: String, password: String) {
-        val requestCall = repository.authenticateUser(email, password)
-        requestCall.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.isSuccessful) {
-                    val headers = response.headers()
-                    token = headers["Auth-Token"]
-                }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-    }
-
     private fun createNote(token: String, title: String, description: String) {
         val requestCall = repository.createNote(token, title, description)
         requestCall.enqueue(object : Callback<Note> {
