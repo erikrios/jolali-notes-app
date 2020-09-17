@@ -26,6 +26,9 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
     private lateinit var viewModel: LoginViewModel
+    private var isLoading = false
+    private var token: String? = null
+    private var exception: Exception? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +48,15 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setTextRegisterColor()
         binding?.btnLogin?.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+            val email = binding?.etEmailAddress?.text.toString()
+            val password = binding?.etPassword?.text.toString()
+
+            val isValid = validate(email, password)
+            if (isValid) {
+                viewModel.authenticateUser(email, password)
+                if (!isLoading && token.toString().isNotEmpty() && (exception == null))
+                    findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+            }
         }
 
         binding?.tvHaveNotAccount?.setOnClickListener {
@@ -60,9 +71,18 @@ class LoginFragment : Fragment() {
 
     private fun handleState(viewState: LoginViewState?) {
         viewState?.let { loginViewState ->
-            showLoading(loginViewState.loading)
-            loginViewState.token?.let { saveToken(it) }
-            loginViewState.exception?.let { showError(it) }
+            isLoading = loginViewState.loading
+            showLoading(isLoading)
+
+            loginViewState.token?.let {
+                token = it
+                saveToken(token)
+            }
+
+            loginViewState.exception?.let {
+                exception = it
+                showError(exception)
+            }
         }
     }
 
@@ -80,13 +100,44 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showError(exception: Exception) {
-        Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
+    private fun showError(exception: Exception?) {
+        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
     }
 
     private fun saveToken(token: String?) {
         val sharedPref = activity?.getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
         sharedPref?.edit { putString(PREF_AUTH_TOKEN, token) }
+    }
+
+    private fun validate(email: String, password: String): Boolean {
+        var isEmpty = false
+        var isInvalid = false
+
+        if (email.isEmpty()) {
+            binding?.etEmailAddress?.error = getString(R.string.empty_email_error)
+            isEmpty = true
+        }
+
+        if (password.isEmpty()) {
+            binding?.etPassword?.error = getString(R.string.empty_password_error)
+            isEmpty = true
+        }
+
+        if (email.length < 5 || email.length > 255) {
+            binding?.etEmailAddress?.error = getString(R.string.invalid_email_error)
+            isInvalid = true
+        }
+
+        if (password.length < 5 || password.length > 1024) {
+            binding?.etPassword?.error = getString(R.string.invalid_password_error)
+            isInvalid = true
+        }
+
+        if (!isEmpty && !isInvalid) {
+            return true
+        }
+
+        return false
     }
 
     private fun setTextRegisterColor() {
