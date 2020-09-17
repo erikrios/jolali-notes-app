@@ -6,9 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.databinding.FragmentLoginBinding
+import com.erikriosetiawan.jolalinotes.repository.NotesRepository
+import com.erikriosetiawan.jolalinotes.ui.viewmodels.LoginViewModel
+import com.erikriosetiawan.jolalinotes.ui.viewmodels.LoginViewModelFactory
+import com.erikriosetiawan.jolalinotes.ui.viewstate.LoginViewState
 
 class LoginFragment : Fragment() {
 
@@ -21,6 +27,11 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        val factory = LoginViewModelFactory(NotesRepository())
+        val viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java).apply {
+            viewState.observe(viewLifecycleOwner, Observer(this@LoginFragment::handleState))
+        }
         return binding?.root
     }
 
@@ -39,6 +50,12 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun handleState(viewState: LoginViewState?) {
+        viewState?.let {
+
+        }
     }
 
     private fun setTextRegisterColor() {
