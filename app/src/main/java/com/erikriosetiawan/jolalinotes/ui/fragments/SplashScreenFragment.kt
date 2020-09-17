@@ -1,7 +1,5 @@
 package com.erikriosetiawan.jolalinotes.ui.fragments
 
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -10,8 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.erikriosetiawan.jolalinotes.R
-import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_AUTH_TOKEN
-import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_FILE_KEY
+import com.erikriosetiawan.jolalinotes.utils.getToken
 
 class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
 
@@ -59,15 +56,6 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
         super.onDestroy()
         // Remove the runnable when activity completely cleared
         handler?.removeCallbacks(runnable)
-    }
-
-    /**
-     * Get token from shared preferences
-     */
-    private fun getToken(): String? {
-        val sharedPref: SharedPreferences? =
-            activity?.getSharedPreferences(PREF_FILE_KEY, MODE_PRIVATE)
-        return sharedPref?.getString(PREF_AUTH_TOKEN, "")
     }
 
     /**
