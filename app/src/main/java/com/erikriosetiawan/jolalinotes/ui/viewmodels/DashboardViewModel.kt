@@ -23,7 +23,7 @@ class DashboardViewModel(private val repository: NotesRepository, private val to
         getNotes(token)
     }
 
-    private fun getNotes(token: String): Job {
+    fun getNotes(token: String): Job {
         return viewModelScope.launch {
             _viewState.value = DashboardViewState(loading = true)
 
