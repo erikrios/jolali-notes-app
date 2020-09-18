@@ -32,4 +32,5 @@
     <string name="invalid_password_error">Invalid Password</string>
     <string name="invalid_name_error">Invalid Name</string>
     <string name="password_not_match_error">Password not match</string>
+    <string name="startapp_app_id" translatable="false">208394595</string>
 </resources>
