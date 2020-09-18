@@ -2,14 +2,20 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.adapters.NoteAdapter
 import com.erikriosetiawan.jolalinotes.databinding.FragmentDashboardBinding
 import com.erikriosetiawan.jolalinotes.models.Note
-import com.erikriosetiawan.jolalinotes.models.NoteOwner
+import com.erikriosetiawan.jolalinotes.repository.NotesRepository
+import com.erikriosetiawan.jolalinotes.ui.viewmodels.DashboardViewModel
+import com.erikriosetiawan.jolalinotes.ui.viewmodels.DashboardViewModelFactory
+import com.erikriosetiawan.jolalinotes.ui.viewstate.DashboardViewState
 import com.erikriosetiawan.jolalinotes.utils.getToken
 import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
 import com.startapp.sdk.adsbase.StartAppAd
@@ -18,6 +24,8 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
+    private val notes = mutableListOf<Note>()
+    private lateinit var viewModel: DashboardViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,15 +40,18 @@ class DashboardFragment : Fragment() {
             context?.getString(R.string.my_notes)
         )
 
+        val token = getToken().toString()
+        val factory = DashboardViewModelFactory(NotesRepository(), token)
+        viewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java).apply {
+            viewState.observe(viewLifecycleOwner, Observer(this@DashboardFragment::handleState))
+        }
+
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val notes = setDummyData()
         setRecyclerView(notes)
-
-        val token = getToken().toString()
 
         binding?.fabAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
@@ -67,28 +78,45 @@ class DashboardFragment : Fragment() {
     private fun setRecyclerView(notes: List<Note>) {
         val noteAdapter = context?.let { NoteAdapter(it, notes) }
         noteAdapter?.setOnItemClickListener { note ->
-            findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
+            val action =
+                DashboardFragmentDirections.actionDashboardFragmentToDetailsFragment(note._id)
+            findNavController().navigate(action)
             StartAppAd.showAd(context)
         }
 
         binding?.rvNotes?.adapter = noteAdapter
     }
 
-    private fun setDummyData(): List<Note> {
-        val notes = mutableListOf<Note>()
+    private fun handleState(viewState: DashboardViewState?) {
+        viewState?.let { dashboardViewState ->
+            showLoading(dashboardViewState.loading)
 
-        for (i in 1..99) {
-            val note = Note(
-                "$i Lorem Ipsum Dolor $i",
-                "$i Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "2020/09/$i",
-                "date",
-                "time",
-                NoteOwner("", "")
-            )
-            notes.add(note)
+            dashboardViewState.notes.apply {
+                getNotes(this)
+            }
+
+            dashboardViewState.exception.apply {
+                showError(this)
+            }
         }
+    }
 
-        return notes
+    private fun showLoading(isLoading: Boolean) {
+        binding?.progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showError(exception: Exception?) {
+        exception?.let {
+            Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun getNotes(notes: List<Note>?) {
+        notes?.let {
+            this.notes.apply {
+                clear()
+                addAll(notes)
+            }
+        }
     }
 }
