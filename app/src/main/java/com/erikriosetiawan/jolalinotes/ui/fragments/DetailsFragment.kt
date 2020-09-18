@@ -102,10 +102,11 @@ class DetailsFragment : Fragment() {
                     }
                 } else {
                     // Create Note
-                    viewModel.createNote(title, description)
-                    findNavController().popBackStack()
-                    Toast.makeText(context, getString(R.string.note_saved), Toast.LENGTH_SHORT)
-                        .show()
+                    viewModel.createNote(title, description).invokeOnCompletion {
+                        findNavController().popBackStack()
+                        Toast.makeText(context, getString(R.string.note_saved), Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         }
