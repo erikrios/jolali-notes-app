@@ -90,7 +90,7 @@ class DetailsFragment : Fragment() {
             }
             R.id.item_save -> {
                 val title = binding?.etTitle?.text.toString()
-                val description = binding?.etTitle?.text.toString()
+                val description = binding?.etDescription?.text.toString()
 
                 if (id != null) {
                     // Update Note
