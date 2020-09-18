@@ -2,7 +2,6 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -13,6 +12,7 @@ import com.erikriosetiawan.jolalinotes.models.Note
 import com.erikriosetiawan.jolalinotes.models.NoteOwner
 import com.erikriosetiawan.jolalinotes.utils.getToken
 import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
+import com.startapp.sdk.adsbase.StartAppAd
 
 class DashboardFragment : Fragment() {
 
@@ -67,8 +67,8 @@ class DashboardFragment : Fragment() {
     private fun setRecyclerView(notes: List<Note>) {
         val noteAdapter = context?.let { NoteAdapter(it, notes) }
         noteAdapter?.setOnItemClickListener { note ->
-            Toast.makeText(context, note.title, Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
+            StartAppAd.showAd(context)
         }
 
         binding?.rvNotes?.adapter = noteAdapter
