@@ -13,7 +13,7 @@ class DetailsViewModel(private val repository: NotesRepository, private val toke
     ViewModel() {
 
     private val _viewState = MutableLiveData<DetailsViewState>().apply {
-        value = DetailsViewState(loading = true)
+        value = DetailsViewState(loading = false)
     }
 
     val viewState: LiveData<DetailsViewState>
