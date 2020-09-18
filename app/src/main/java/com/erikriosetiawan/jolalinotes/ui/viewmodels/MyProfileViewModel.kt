@@ -9,18 +9,22 @@ import com.erikriosetiawan.jolalinotes.ui.viewstate.MyProfileViewState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MyProfileViewModel(private val repository: NotesRepository) : ViewModel() {
+class MyProfileViewModel(private val repository: NotesRepository, private val token: String) :
+    ViewModel() {
+
     private val _viewState = MutableLiveData<MyProfileViewState>().apply {
-        value = MyProfileViewState(loading = false)
+        value = MyProfileViewState(loading = true)
     }
 
     val viewState: LiveData<MyProfileViewState>
         get() = _viewState
 
-    fun getUserDetails(token: String): Job {
-        return viewModelScope.launch {
+    init {
+        getUserDetails(token)
+    }
 
-            _viewState.value = MyProfileViewState(loading = true)
+    private fun getUserDetails(token: String): Job {
+        return viewModelScope.launch {
 
             try {
                 val response = repository.getUserDetails(token)
