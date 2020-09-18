@@ -24,7 +24,6 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
-    private val notes = mutableListOf<Note>()
     private lateinit var viewModel: DashboardViewModel
 
     override fun onCreateView(
@@ -51,7 +50,6 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setRecyclerView(notes)
 
         binding?.fabAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
@@ -92,7 +90,7 @@ class DashboardFragment : Fragment() {
             showLoading(dashboardViewState.loading)
 
             dashboardViewState.notes.apply {
-                getNotes(this)
+                this?.let { setRecyclerView(it) }
             }
 
             dashboardViewState.exception.apply {
@@ -108,15 +106,6 @@ class DashboardFragment : Fragment() {
     private fun showError(exception: Exception?) {
         exception?.let {
             Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun getNotes(notes: List<Note>?) {
-        notes?.let {
-            this.notes.apply {
-                clear()
-                addAll(notes)
-            }
         }
     }
 }
