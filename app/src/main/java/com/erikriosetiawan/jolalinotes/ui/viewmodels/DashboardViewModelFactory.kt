@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.erikriosetiawan.jolalinotes.repository.NotesRepository
 
 @Suppress("UNCHECKED_CAST")
-class DashboardViewModelProvider(
+class DashboardViewModelFactory(
     private val repository: NotesRepository,
     private val token: String
 ) : ViewModelProvider.Factory {
