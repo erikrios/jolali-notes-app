@@ -102,4 +102,7 @@ dependencies {
 
     // Lottie
     implementation 'com.airbnb.android:lottie:3.4.0'
+
+    // StartApp
+    implementation 'com.startapp:inapp-sdk:4.6.1'
 }
