@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.databinding.FragmentDetailsBinding
 import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
@@ -13,6 +14,8 @@ class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding
+
+    val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +35,7 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        args.notesId?.let { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
     }
 
     override fun onDestroyView() {
