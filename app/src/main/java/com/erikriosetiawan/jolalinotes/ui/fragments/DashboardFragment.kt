@@ -42,8 +42,6 @@ class DashboardFragment : Fragment() {
 
         val token = getToken().toString()
 
-        Toast.makeText(context, token, Toast.LENGTH_SHORT).show()
-
         binding?.fabAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
         }
