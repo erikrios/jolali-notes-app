@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.databinding.ItemNoteBinding
 import com.erikriosetiawan.jolalinotes.models.Note
+import com.erikriosetiawan.jolalinotes.utils.dateFormat
 
 class NoteAdapter(private val context: Context, private val notes: List<Note>) :
     RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
@@ -37,7 +38,7 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
         fun bind(note: Note, position: Int, clickListener: ((Note) -> Unit)?) {
             binding.tvTitle.text = note.title
             binding.tvDescription.text = note.description
-            binding.tvDate.text = note.date
+            binding.tvDate.text = context.dateFormat(note.date)
             binding.tvFirstCharacter.text = note.title[0].toString()
             binding.imgIcon.apply {
                 when {
