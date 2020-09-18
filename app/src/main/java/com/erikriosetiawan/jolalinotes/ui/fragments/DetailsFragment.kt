@@ -3,13 +3,11 @@ package com.erikriosetiawan.jolalinotes.ui.fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.erikriosetiawan.jolalinotes.R
 import com.erikriosetiawan.jolalinotes.databinding.FragmentDetailsBinding
 import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
-import com.startapp.sdk.adsbase.StartAppAd
 
 class DetailsFragment : Fragment() {
 
@@ -34,7 +32,6 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showAds()
     }
 
     override fun onDestroyView() {
@@ -55,12 +52,5 @@ class DetailsFragment : Fragment() {
                 .show()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    // Show ads when back button pressed
-    private fun showAds() {
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            StartAppAd.onBackPressed(context)
-        }
     }
 }
