@@ -20,6 +20,7 @@ import com.erikriosetiawan.jolalinotes.ui.viewmodels.LoginViewModelFactory
 import com.erikriosetiawan.jolalinotes.ui.viewstate.LoginViewState
 import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_AUTH_TOKEN
 import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_FILE_KEY
+import com.startapp.sdk.adsbase.StartAppAd
 
 class LoginFragment : Fragment() {
 
@@ -63,6 +64,7 @@ class LoginFragment : Fragment() {
 
         binding?.tvHaveNotAccount?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            StartAppAd.showAd(context)
         }
     }
 
