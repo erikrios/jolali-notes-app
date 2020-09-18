@@ -1,5 +1,6 @@
 package com.erikriosetiawan.jolalinotes.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.erikriosetiawan.jolalinotes.ui.viewmodels.MyProfileViewModelFactory
 import com.erikriosetiawan.jolalinotes.ui.viewstate.MyProfileViewState
 import com.erikriosetiawan.jolalinotes.utils.getToken
 import com.erikriosetiawan.jolalinotes.utils.setCustomActionBar
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -86,9 +88,13 @@ class MyProfileFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun dateFormat(isoFormat: String): String? {
-        val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+        val dateFormat: DateFormat =
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
         val date = dateFormat.parse(isoFormat)
-        return date?.let { dateFormat.format(date) }
+        return date?.let {
+            SimpleDateFormat("yyyy/MM/dd").format(date)
+        }
     }
 }
