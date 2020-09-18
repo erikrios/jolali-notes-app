@@ -23,9 +23,6 @@
         <meta-data
             android:name="com.startapp.sdk.APPLICATION_ID"
             android:value="@string/startapp_app_id" />
-        <meta-data
-            android:name="com.startapp.sdk.RETURN_ADS_ENABLED"
-            android:value="false" />
     </application>
 
 </manifest>
