@@ -24,6 +24,7 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
+    private lateinit var token: String
     private lateinit var viewModel: DashboardViewModel
 
     override fun onCreateView(
@@ -39,7 +40,8 @@ class DashboardFragment : Fragment() {
             context?.getString(R.string.my_notes)
         )
 
-        val token = getToken().toString()
+        token = getToken().toString()
+
         val factory = DashboardViewModelFactory(NotesRepository(), token)
         viewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java).apply {
             viewState.observe(viewLifecycleOwner, Observer(this@DashboardFragment::handleState))
@@ -59,6 +61,11 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getNotes(token)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
