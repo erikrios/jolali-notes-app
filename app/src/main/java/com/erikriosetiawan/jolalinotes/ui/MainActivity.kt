@@ -2,11 +2,9 @@ package com.erikriosetiawan.jolalinotes.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.erikriosetiawan.jolalinotes.BuildConfig
 import com.erikriosetiawan.jolalinotes.databinding.ActivityMainBinding
 import com.erikriosetiawan.jolalinotes.utils.Constant.PREF_FILE_KEY
 import com.startapp.sdk.adsbase.StartAppAd
-import com.startapp.sdk.adsbase.StartAppSDK
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         // TODO Always use test ads during development and testing
-        StartAppSDK.setTestAdsEnabled(BuildConfig.DEBUG)
+//        StartAppSDK.setTestAdsEnabled(BuildConfig.DEBUG)
         StartAppAd.disableSplash()
 
         setContentView(binding.root)
