@@ -2,7 +2,7 @@
 
 Coming Soon on Google Play Store
 
-![Screenshoot 1](./screenshots/Screenshoot1.png =240x427)
+![Screenshoot 1](./screenshots/Screenshoot1.png) <!-- .element height="50%" width="50%" -->
 
 ![Screenshoot 2](./screenshots/Screenshoot2.png =240x427)
 
