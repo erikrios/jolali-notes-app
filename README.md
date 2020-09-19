@@ -2,6 +2,8 @@
 
 Coming Soon on Google Play Store
 
+<img src="./screenshots/Screenshoot1.png" width="40%" />
+
 ![Screenshoot 1](./screenshots/Screenshoot1.png) <!-- .element height="50%" width="50%" -->
 
 ![Screenshoot 2](./screenshots/Screenshoot2.png =240x427)
